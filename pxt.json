@@ -1,5 +1,5 @@
 {
-    "name": "Array2",
+    "name": "array2led",
     "description": "",
     "dependencies": {
         "core": "*",
