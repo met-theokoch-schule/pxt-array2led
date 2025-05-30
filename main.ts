@@ -1,38 +1,12 @@
-let array: any[] = []
-for (let index = 0; index < 64; index++) {
-    array.push(0)
-}
-
-let ccolors = [0xff0000, 0xFF7F00, 0xFFFE00, 0x7FFF00, 0x00FF00, 0x00FF7F,
-    0x00FFFE, 0x0040FF, 0x0000FF, 0x6000FF, 0xFE00FF, 0xFF0040]
 
 
 namespace ledmatrix {
+    let ccolors = [0xff0000, 0xFF7F00, 0xFFFE00, 0x7FFF00, 0x00FF00, 0x00FF7F,
+        0x00FFFE, 0x0040FF, 0x0000FF, 0x6000FF, 0xFE00FF, 0xFF0040]
+    
     let size = 8;
 
     let strip = neopixel.create(DigitalPin.C8, 64, NeoPixelMode.RGB)
-
-    /**
-    * Setzt die größe der LED-Matrix, und bestimmt damit, ob die vom Calliope verwendet wird, oder die externe.
-    */
-    //% blockId=LedMatrixSize block="set led-matrix size to %c %"
-    //% block.loc.de="setze Größe der Led-Matrix auf %c %"
-    //% c.defl=8
-    //% c.min=5 c.max=8
-    export function setLedMatrixSize(c: number) {
-        if (c <= 6) {
-            c = 5
-        }
-        if (c > 6) {
-            c = 8
-        }
-        size = c
-        let a: number[] = []
-        for (let index = 0; index < c * c; index++) {
-            a.push(0)
-        }
-        array = a
-    }
 
     function byteToHex(n: number) {
         const hexChars = "0123456789ABCDEF";
@@ -73,17 +47,17 @@ namespace ledmatrix {
 
     //% blockId=LedMatrixShow block="show array on leds"
     //% block.loc.de="zeige Array auf LEDs"
-    export function show() {
-        if (size == 5) {
+    export function show(array: any[]) {
+        if (array.length < 64) {
             for (let index = 0; index < 25; index++) {
 
             }
-        } else if (size == 8) {
+        } else {
             for (let index = 0; index < 64; index++) {
                 if (typeof array[index] == "number") {
                     strip.setPixelColor(index, grayHexNumber(array[index]))
                 } else if (typeof array[index] == "string") {
-                    strip.setPixelColor(index, hexStringToNumber(array[index]))
+                    
                 }
             }
             strip.show()
@@ -98,14 +72,6 @@ namespace ledmatrix {
 }
 
 ledmatrix.showBlack()
-
-for (let index = 0; index < 64; index++) {
-    array[index] = 20
-}
-
-array[8] = "FF0000"
-
-ledmatrix.show()
 
 basic.forever(function () {
 })
