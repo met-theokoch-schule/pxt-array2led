@@ -1,5 +1,3 @@
-
-
 namespace ledmatrix {
     let ccolors = [0xff0000, 0xFF7F00, 0xFFFE00, 0x7FFF00, 0x00FF00, 0x00FF7F,
         0x00FFFE, 0x0040FF, 0x0000FF, 0x6000FF, 0xFE00FF, 0xFF0040]
@@ -48,28 +46,26 @@ namespace ledmatrix {
         return hexStringToNumber(hexString)
     }
 
-    //% blockId=LedMatrixShow block="show array on leds"
-    //% block.loc.de="zeige Array auf LEDs"
     export function show(array: any[]) {
         if (array.length == 25) {
             let leds = ``
             for (let index = 0; index < 25; index++) {
                 if (typeof array[index] == "number") {
                     // Auf gültigen Bereich runden und begrenzen
-                    let v = Math.round(array[index]);
-                    if (v < 0) v = 0;
-                    if (v > 255) v = 255;
-                    led.plotBrightness(Math.floor(index / 5), index % 5, v)
+                    let w = Math.round(array[index]);
+                    if (w < 0) w = 0;
+                    if (w > 255) w = 255;
+                    led.plotBrightness(Math.floor(index / 5), index % 5, w)
                 } else if (typeof array[index] == "string") {
                     led.plotBrightness(Math.floor(index / 5), index % 5, 0)
                 }
             }
         } else if (array.length == 64) {
-            for (let index = 0; index < 64; index++) {
-                if (typeof array[index] == "number") {
-                    strip.setPixelColor(index, grayHexNumber(array[index]))
-                } else if (typeof array[index] == "string") {
-                    strip.setPixelColor(index, hexStringToNumber(array[index]))
+            for (let index2 = 0; index2 < 64; index2++) {
+                if (typeof array[index2] == "number") {
+                    strip.setPixelColor(index2, grayHexNumber(array[index2]))
+                } else if (typeof array[index2] == "string") {
+                    strip.setPixelColor(index2, hexStringToNumber(array[index2]))
                 }
             }
             strip.show()
@@ -84,8 +80,7 @@ namespace ledmatrix {
     }
 
 }
-
 ledmatrix.showBlack()
-
 basic.forever(function () {
+	
 })
