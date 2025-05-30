@@ -1,20 +1,20 @@
 /**
  * Well known colors for a NeoPixel strip
  */
-enum Farben {
-    ROT = "FF0000",
-    ORANGE = "FF8000",
-    GELB = "FFFF00",
-    GRUEN = "00FF00",
-    TUERKIS = "00FFFF",
-    BLAU = "0000FF",
-    MAGENTA = "FF00FF",
-    ROSA = "FF0080",
-    WEISS = "FFFFFF",
-    GRAU = "909090",
-    DUNKELGRAU = "505050",
-    SCHWARZ = "000000"
-}
+const Farben = {
+    ROT: "FF0000",
+    ORANGE: "FF8000",
+    GELB: "FFFF00",
+    GRUEN: "00FF00",
+    TUERKIS: "00FFFF",
+    BLAU: "0000FF",
+    MAGENTA: "FF00FF",
+    ROSA: "FF0080",
+    WEISS: "FFFFFF",
+    GRAU: "909090",
+    DUNKELGRAU: "505050",
+    SCHWARZ: "000000"
+};
 
 namespace LedMatrix {
     
