@@ -57,7 +57,7 @@ namespace ledmatrix {
                 if (typeof array[index] == "number") {
                     strip.setPixelColor(index, grayHexNumber(array[index]))
                 } else if (typeof array[index] == "string") {
-                    
+                    strip.setPixelColor(index, hexStringToNumber(array[index]))
                 }
             }
             strip.show()
