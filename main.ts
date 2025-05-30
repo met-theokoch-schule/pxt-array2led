@@ -71,9 +71,9 @@ namespace LedMatrix {
                     let w = Math.round(array[index]);
                     if (w < 0) w = 0;
                     if (w > 255) w = 255;
-                    led.plotBrightness(Math.floor(index / 5), index % 5, w)
+                    led.plotBrightness(index % 5, Math.floor(index / 5), w)
                 } else if (typeof array[index] == "string") {
-                    led.plotBrightness(Math.floor(index / 5), index % 5, 0)
+                    led.plotBrightness(index % 5, Math.floor(index / 5), 0)
                 }
             }
         } else if (array.length == 64) {
@@ -98,3 +98,4 @@ namespace LedMatrix {
 
 }
 LedMatrix.showBlack()
+basic.pause(1000)
