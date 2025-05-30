@@ -1,7 +1,18 @@
 namespace ledmatrix {
-    let ccolors = [0xff0000, 0xFF7F00, 0xFFFE00, 0x7FFF00, 0x00FF00, 0x00FF7F,
-        0x00FFFE, 0x0040FF, 0x0000FF, 0x6000FF, 0xFE00FF, 0xFF0040]
     
+    const ROT = "FF0000";
+    const ORANGE = "FF8000";
+    const GELB = "FFFF00";
+    const GRUEN = "00FF00";
+    const TUERKIS = "00FFFF";
+    const BLAU = "0000FF";
+    const MAGENTA = "FF00FF";
+    const ROSA = "FF0080";
+    const WEISS = "FFFFFF";
+    const GRAU = "909090";
+    const DUNKELGRAU = "505050";
+    const SCHWARZ = "000000";
+
     let size = 8;
 
     let strip = neopixel.create(DigitalPin.C8, 64, NeoPixelMode.RGB)
@@ -61,6 +72,7 @@ namespace ledmatrix {
                 }
             }
         } else if (array.length == 64) {
+            strip.setBrightness(20);
             for (let index2 = 0; index2 < 64; index2++) {
                 if (typeof array[index2] == "number") {
                     strip.setPixelColor(index2, grayHexNumber(array[index2]))
