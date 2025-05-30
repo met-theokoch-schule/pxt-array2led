@@ -20,14 +20,17 @@ namespace ledmatrix {
         for (let i = 0; i < 6; i++) {
             const digit = hexString.charCodeAt(i);
             let value;
-            if (digit >= 48 && digit <= 57) {        // '0'-'9'
+            if (digit >= 48 && digit <= 57) {         // '0'–'9'
                 value = digit - 48;
-            } else if (digit >= 65 && digit <= 70) { // 'A'-'F'
+            } else if (digit >= 65 && digit <= 70) {  // 'A'–'F'
                 value = digit - 55;
+            } else if (digit >= 97 && digit <= 102) { // 'a'–'f'
+                value = digit - 87;
+            } else {
+                value = 0; // Fallback für ungültige Zeichen
             }
             result = result * 16 + value;
         }
-
         return result;
     }
 
@@ -48,11 +51,20 @@ namespace ledmatrix {
     //% blockId=LedMatrixShow block="show array on leds"
     //% block.loc.de="zeige Array auf LEDs"
     export function show(array: any[]) {
-        if (array.length < 64) {
+        if (array.length == 25) {
+            let leds = ``
             for (let index = 0; index < 25; index++) {
-
+                if (typeof array[index] == "number") {
+                    // Auf gültigen Bereich runden und begrenzen
+                    let v = Math.round(array[index]);
+                    if (v < 0) v = 0;
+                    if (v > 255) v = 255;
+                    led.plotBrightness(Math.floor(index / 5), index % 5, v)
+                } else if (typeof array[index] == "string") {
+                    led.plotBrightness(Math.floor(index / 5), index % 5, 0)
+                }
             }
-        } else {
+        } else if (array.length == 64) {
             for (let index = 0; index < 64; index++) {
                 if (typeof array[index] == "number") {
                     strip.setPixelColor(index, grayHexNumber(array[index]))
@@ -61,6 +73,8 @@ namespace ledmatrix {
                 }
             }
             strip.show()
+        } else {
+            basic.showString("Arraygröße nicht unterstützt!")
         }
     }
 
